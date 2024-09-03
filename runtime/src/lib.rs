@@ -43,6 +43,7 @@ pub use sp_runtime::{Perbill, Permill};
 
 /// Import the template pallet.
 pub use pallet_template;
+use pallet_template::WeightInfo;
 
 /// An index to a block.
 pub type BlockNumber = u32;
@@ -252,6 +253,13 @@ impl pallet_template::Config for Runtime {
     type WeightInfo = pallet_template::weights::SubstrateWeight<Runtime>;
 }
 
+impl pallet_poe::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type MaxClaimLength = ConstU32<3>;
+
+    type WeightInfo = pallet_poe::weights::SubstrateWeight<Runtime>;
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 #[frame_support::runtime]
 mod runtime {
@@ -293,6 +301,9 @@ mod runtime {
     // Include the custom logic from the pallet-template in the runtime.
     #[runtime::pallet_index(7)]
     pub type TemplateModule = pallet_template;
+
+    #[runtime::pallet_index(8)]
+    pub type PoeModule = pallet_poe;
 }
 
 /// The address format for describing accounts.

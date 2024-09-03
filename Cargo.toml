@@ -11,8 +11,8 @@ resolver = "2"
 members = [
 	"node",
 	"pallets/template",
+	"pallets/poe",
 	"runtime",
-
 ]
 
 [workspace.lints.rust]
@@ -74,7 +74,7 @@ codegen-units = 1
 
 [profile.testnet]
 inherits = "release"
-debug = 1               # debug symbols are useful for profilers
+#debug = 1               # debug symbols are useful for profilers
 debug-assertions = true
 overflow-checks = true
 
