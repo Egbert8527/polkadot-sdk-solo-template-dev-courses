@@ -1,6 +1,23 @@
-# 问题
-1. mock.rs 中 不加这个无法通过编译，少了一些trait的实现
-   `#[derive_impl(frame_system::config_preludes::TestDefaultConfig)]`
-2. 为什么不能测试触发的事件，比较奇怪
-# 测试
-![img.png](img.png)
+# 基准测试记录
+![img_1.png](img_1.png)
+
+
+# 命令
+```shell
+-- 基准测试编译
+cargo build --profile=production --features runtime-benchmarks
+
+-- 基准测试 生成文件
+
+./target/production/solochain-template-node benchmark pallet \
+    --chain dev \
+    --execution=wasm \
+    --wasm-execution=compiled \
+    --pallet pallet-poe \
+    --extrinsic "*" \
+    --steps 20 \
+    --repeat 10 \
+    --output pallets/poe/src/weights.rs \
+    --template .maintain/frame-weight-template.hbs 
+    
+```
